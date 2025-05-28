@@ -1,1 +1,31 @@
+def validar_nome(nome):
+    """Verifica se o nome contém apenas caracteres válidos (letras e espaços)"""
+    return all(c.isalpha() or c.isspace() for c in nome)
 
+# 1) Pedir ao usuário para inserir 10 nomes
+nomes = []
+print("Por favor, insira 10 nomes:")
+
+for i in range(1, 11):
+    while True:
+        nome = input(f"Nome {i}: ").strip()
+        if nome:  # Verifica se não está vazio
+            break
+        print("O nome não pode estar vazio. Por favor, tente novamente.")
+    
+    # 3) Verificar caracteres inválidos
+    if not validar_nome(nome):
+        print(f"Erro: O nome '{nome}' contém caracteres inválidos. Use apenas letras e espaços.")
+        exit()
+    
+    nomes.append(nome)
+
+# 4) Organizar os nomes em ordem alfabética
+nomes_ordenados = sorted(nomes, key=lambda x: x.lower())  # Ordena sem diferenciar maiúsculas/minúsculas
+
+print("\nNomes em ordem alfabética:")
+for nome in nomes_ordenados:
+    # 5) Imprimir a quantidade de letras de cada nome
+    # Removendo espaços para contar apenas letras
+    qtd_letras = len([c for c in nome if c.isalpha()])
+    print(f"{nome} - {qtd_letras} letras")
